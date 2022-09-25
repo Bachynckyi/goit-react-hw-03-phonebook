@@ -17,16 +17,19 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.contacts !== this.state.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
-  };
+  }
 
   componentDidMount() {
-    const savedContact = (localStorage.getItem('contacts'));
+    const savedContact = localStorage.getItem('contacts');
     const contact = JSON.parse(savedContact);
-    this.setState({contacts: contact})
-  };
+
+    if (contact) {
+      this.setState({ contacts: contact });
+    }
+  }
 
   onSubmitHandler = data => {
     this.setState(prevState => ({
